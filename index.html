@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神矢 瞬 | 手相鑑定 — 神主による本格手相占い</title>
+  <meta name="description" content="神職（神主）兼 手相鑑定士 神矢 瞬による本格手相鑑定。写真一枚で運命の線を読み解きます。3,000円 / 納期2〜3日。">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep:    #06060e;
+      --bg-card:    #0e0e1c;
+      --bg-card2:   #12121f;
+      --gold:       #c9a84c;
+      --gold-light: #e8c96a;
+      --gold-dim:   #7a6228;
+      --gold-glow:  rgba(201,168,76,0.18);
+      --purple:     #3d1a5c;
+      --purple-light:#6b35a8;
+      --text:       #ece4d0;
+      --text-dim:   #8a8070;
+      --border:     rgba(201,168,76,0.25);
+      --white-robe: #f0eeea;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(6,6,14,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      color: var(--gold);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── Sections ── */
+    section { padding: 6rem 1.5rem; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--gold-light);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+    .section-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.2rem auto 3rem;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 60px;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 40%, rgba(61,26,92,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 60%),
+        var(--bg-deep);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(201,168,76,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(107,53,168,0.08) 0%, transparent 50%);
+    }
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+      position: relative; z-index: 1;
+    }
+    @media(min-width:768px) {
+      .hero-inner { flex-direction: row; text-align: left; gap: 4rem; }
+    }
+
+    /* Priest SVG Avatar */
+    .priest-wrap {
+      flex-shrink: 0;
+      width: 220px;
+      filter: drop-shadow(0 0 30px rgba(201,168,76,0.25));
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      color: var(--gold-light);
+      letter-spacing: 0.18em;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+    .hero-text .hero-title-en {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      color: var(--gold-dim);
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .hero-text p {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+      max-width: 420px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold-dim), var(--gold), var(--gold-dim));
+      color: var(--bg-deep);
+      padding: 0.9rem 2.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.3s, transform 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .hero-cta:hover { filter: brightness(1.2); transform: translateY(-2px); }
+
+    .hero-price-badge {
+      display: inline-flex; flex-direction: column;
+      margin-left: 1.5rem;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      vertical-align: middle;
+      background: var(--gold-glow);
+    }
+    .hero-price-badge .price { font-size: 1.4rem; color: var(--gold); font-weight: 700; }
+    .hero-price-badge .lead  { font-size: 0.75rem; color: var(--text-dim); }
+
+    /* Stars/particles */
+    .stars { position: absolute; inset: 0; pointer-events: none; }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      animation: twinkle var(--d,4s) var(--delay,0s) infinite;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity:0; transform:scale(1); }
+      50%      { opacity:var(--op,0.6); transform:scale(1.5); }
+    }
+
+    /* ── Lines Section ── */
+    #lines { background: var(--bg-card); }
+
+    .lines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .line-card {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      padding: 1.8rem 1.5rem;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .line-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .line-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--line-color, var(--gold));
+    }
+    .line-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .line-name {
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+    }
+    .line-name-sub {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .line-card p { font-size: 0.88rem; color: var(--text-dim); }
+
+    /* palm hand SVG inline */
+    .palm-figure {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .palm-figure svg {
+      width: 180px;
+      filter: drop-shadow(0 0 20px rgba(201,168,76,0.2));
+    }
+
+    /* ── Flow Section ── */
+    #flow { background: var(--bg-deep); }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+    .flow-steps::before {
+      content: '';
+      position: absolute;
+      top: 38px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold-dim), transparent);
+    }
+    @media(max-width:640px) { .flow-steps::before { display: none; } }
+
+    .step {
+      text-align: center;
+      padding: 0 1rem 2rem;
+      position: relative;
+    }
+    .step-num {
+      width: 76px; height: 76px;
+      border: 2px solid var(--gold-dim);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      background: var(--bg-deep);
+      position: relative; z-index: 1;
+    }
+    .step-num .n {
+      font-size: 0.65rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.2em;
+    }
+    .step-num .icon { font-size: 1.6rem; }
+    .step h3 {
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .step p { font-size: 0.82rem; color: var(--text-dim); }
+
+    /* ── Pricing ── */
+    #price { background: var(--bg-card); }
+
+    .price-card {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--bg-deep);
+      border: 1px solid var(--gold-dim);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card::before {
+      content: '鑑定料金';
+      position: absolute;
+      top: -0.5rem; left: 50%; transform: translateX(-50%);
+      background: var(--bg-deep);
+      padding: 0 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+    }
+    .price-amount {
+      font-size: 3.5rem;
+      color: var(--gold-light);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .price-amount span { font-size: 1.4rem; }
+    .price-tax { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .price-features {
+      list-style: none;
+      margin: 1.5rem 0 2rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 0;
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .price-features li {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.88rem; color: var(--text-dim);
+      justify-content: center;
+    }
+    .price-features .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .price-cta {
+      display: block;
+      background: linear-gradient(135deg, #3a1060, #6b35a8);
+      border: 1px solid var(--purple-light);
+      color: var(--gold-light);
+      padding: 1rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      font-family: 'Noto Serif JP', serif;
+      cursor: pointer;
+      text-decoration: none;
+      transition: filter 0.3s, transform 0.2s;
+    }
+    .price-cta:hover { filter: brightness(1.3); transform: translateY(-2px); }
+
+    /* ── Profile ── */
+    #profile { background: var(--bg-deep); }
+
+    .profile-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    @media(min-width:640px) {
+      .profile-inner { flex-direction: row; align-items: flex-start; }
+    }
+
+    .profile-avatar-wrap {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .profile-avatar-wrap svg { width: 160px; }
+    .profile-name-ja {
+      font-size: 1.3rem;
+      color: var(--gold-light);
+      letter-spacing: 0.3em;
+      font-weight: 700;
+    }
+    .profile-title {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+    }
+
+    .profile-bio h3 {
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    .profile-bio p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+    .profile-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+    }
+    .tag {
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.8rem;
+      font-size: 0.75rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg-card2);
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    footer .footer-logo {
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.25em;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+    footer .footer-sub {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+    footer .contact-email {
+      display: inline-block;
+      border: 1px solid var(--border);
+      padding: 0.7rem 2rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      transition: background 0.3s;
+    }
+    footer .contact-email:hover { background: var(--gold-glow); }
+    footer .copyright {
+      margin-top: 2rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Responsive nav ── */
+    @media(max-width:600px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="#hero" class="nav-logo">⛩ 神矢 瞬</a>
+  <ul class="nav-links">
+    <li><a href="#lines">手相の4線</a></li>
+    <li><a href="#flow">鑑定の流れ</a></li>
+    <li><a href="#price">料金</a></li>
+    <li><a href="#profile">プロフィール</a></li>
+    <li><a href="#contact">お申し込み</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Priest SVG Avatar -->
+      <div class="priest-wrap">
+        <svg viewBox="0 0 240 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="aura" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stop-color="#6b35a8" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#6b35a8" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Background aura -->
+          <ellipse cx="120" cy="220" rx="105" ry="170" fill="url(#aura)"/>
+
+          <!-- ── Eboshi (烏帽子) ── -->
+          <!-- Band base -->
+          <ellipse cx="118" cy="92" rx="34" ry="9" fill="#14082a"/>
+          <!-- Tall main body -->
+          <path d="M102,92 C100,68 104,40 112,18 C116,10 120,6 120,6 C120,6 124,10 128,18 C136,40 140,68 138,92 Z" fill="#0c0520" stroke="#2a1040" stroke-width="1.5"/>
+          <!-- Shine on hat -->
+          <path d="M114,40 C112,30 114,20 118,14" fill="none" stroke="#3d2055" stroke-width="1.5" opacity="0.6"/>
+          <!-- Gold ornament at top -->
+          <circle cx="120" cy="6" r="5" fill="#c9a84c" filter="url(#glow)"/>
+          <circle cx="120" cy="6" r="3" fill="#f0d080"/>
+          <!-- Hat base ring -->
+          <ellipse cx="118" cy="92" rx="34" ry="9" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+
+          <!-- ── Face ── -->
+          <ellipse cx="118" cy="128" rx="30" ry="35" fill="#f5e6c8"/>
+          <!-- Subtle shading -->
+          <ellipse cx="118" cy="135" rx="28" ry="28" fill="none" stroke="#e0cca0" stroke-width="1" opacity="0.4"/>
+          <!-- Eyes -->
+          <ellipse cx="106" cy="122" rx="5.5" ry="6.5" fill="#1a0e06"/>
+          <ellipse cx="130" cy="122" rx="5.5" ry="6.5" fill="#1a0e06"/>
+          <!-- Eye highlights -->
+          <circle cx="108" cy="120" r="1.5" fill="white" opacity="0.7"/>
+          <circle cx="132" cy="120" r="1.5" fill="white" opacity="0.7"/>
+          <!-- Eyebrows (dignified) -->
+          <path d="M99,113 Q106,108 113,112" fill="none" stroke="#3a1e0a" stroke-width="2" stroke-linecap="round"/>
+          <path d="M123,112 Q130,108 137,113" fill="none" stroke="#3a1e0a" stroke-width="2" stroke-linecap="round"/>
+          <!-- Nose -->
+          <path d="M115,130 Q118,135 121,130" fill="none" stroke="#c8a882" stroke-width="1.2"/>
+          <!-- Mouth (serious, composed) -->
+          <path d="M110,142 Q118,146 126,142" fill="none" stroke="#a07050" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Beard hint -->
+          <path d="M112,148 Q118,155 124,148" fill="#b89060" opacity="0.3"/>
+
+          <!-- ── White Robe 白衣 (under layer) ── -->
+          <path d="M88,158 C75,162 58,175 50,200 L48,310 L188,310 L186,200 C178,175 161,162 148,158 Z" fill="#f4f2ee"/>
+          <!-- Robe fold/center seam -->
+          <line x1="118" y1="160" x2="118" y2="310" stroke="#d8d4cc" stroke-width="1.2"/>
+          <!-- V collar -->
+          <path d="M96,158 L118,192 L140,158" fill="#e8e5e0" stroke="#ccc" stroke-width="1"/>
+          <!-- Gold collar trim -->
+          <path d="M96,158 L118,192 L140,158" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.6"/>
+          <!-- Sleeve Left -->
+          <path d="M50,200 C40,196 22,200 12,204 C16,214 28,214 50,212 Z" fill="#f4f2ee" stroke="#d8d4cc" stroke-width="1"/>
+          <!-- Sleeve Right (gohei hand side) -->
+          <path d="M186,200 C196,194 214,196 228,198 C224,210 210,212 186,212 Z" fill="#f4f2ee" stroke="#d8d4cc" stroke-width="1"/>
+          <!-- Robe border trim (gold) -->
+          <path d="M88,158 L50,200 L48,310" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+          <path d="M148,158 L186,200 L188,310" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+          <!-- Hem gold line -->
+          <line x1="48" y1="310" x2="188" y2="310" stroke="#c9a84c" stroke-width="1.2" opacity="0.4"/>
+
+          <!-- ── Purple Hakama 袴 ── -->
+          <rect x="48" y="285" width="140" height="120" rx="2" fill="#3a1250"/>
+          <!-- Hakama pleats -->
+          <line x1="68" y1="285" x2="68" y2="405" stroke="#2a0a3e" stroke-width="1.2"/>
+          <line x1="88" y1="285" x2="88" y2="405" stroke="#2a0a3e" stroke-width="1.2"/>
+          <line x1="108" y1="285" x2="108" y2="405" stroke="#2a0a3e" stroke-width="1.2"/>
+          <line x1="128" y1="285" x2="128" y2="405" stroke="#2a0a3e" stroke-width="1.2"/>
+          <line x1="148" y1="285" x2="148" y2="405" stroke="#2a0a3e" stroke-width="1.2"/>
+          <line x1="168" y1="285" x2="168" y2="405" stroke="#2a0a3e" stroke-width="1.2"/>
+          <!-- Hakama sheen -->
+          <rect x="48" y="285" width="140" height="120" rx="2" fill="none" stroke="#5a2070" stroke-width="1"/>
+          <!-- Waistband -->
+          <rect x="48" y="285" width="140" height="14" rx="2" fill="#2a0a3e"/>
+          <!-- Gold cord -->
+          <path d="M78,285 Q118,276 158,285" fill="none" stroke="#c9a84c" stroke-width="2" opacity="0.7"/>
+
+          <!-- ── Pendant / Accessory ── -->
+          <circle cx="118" cy="178" r="7" fill="#c9a84c" filter="url(#glow)"/>
+          <circle cx="118" cy="178" r="5" fill="#f0d080"/>
+          <circle cx="118" cy="178" r="2" fill="#c9a84c"/>
+
+          <!-- ── Gohei 御幣 (sacred wand) ── -->
+          <!-- Shaft -->
+          <rect x="220" y="140" width="7" height="170" rx="3" fill="#7a6030" stroke="#5a4020" stroke-width="1"/>
+          <!-- Knot/binding -->
+          <rect x="218" y="158" width="11" height="6" rx="1" fill="#c9a84c"/>
+          <!-- Paper strips - left zigzag -->
+          <polyline points="219,168 205,178 219,188 205,198 219,208 205,218 219,228"
+            fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Paper strips - right zigzag -->
+          <polyline points="227,168 241,178 227,188 241,198 227,208 241,218 227,228"
+            fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Paper top fold -->
+          <ellipse cx="223" cy="165" rx="12" ry="4" fill="white" opacity="0.9"/>
+
+          <!-- ── Floating gold particles ── -->
+          <circle cx="25" cy="150" r="2.5" fill="#c9a84c" opacity="0.7" filter="url(#glow)"/>
+          <circle cx="18" cy="240" r="1.8" fill="#c9a84c" opacity="0.5"/>
+          <circle cx="35" cy="320" r="1.5" fill="#c9a84c" opacity="0.4"/>
+          <circle cx="210" cy="120" r="2" fill="#c9a84c" opacity="0.6" filter="url(#glow)"/>
+          <circle cx="200" cy="300" r="1.5" fill="#c9a84c" opacity="0.5"/>
+          <!-- Small stars -->
+          <text x="20" y="180" font-size="10" fill="#c9a84c" opacity="0.5">✦</text>
+          <text x="205" y="350" font-size="8" fill="#c9a84c" opacity="0.4">✦</text>
+        </svg>
+      </div>
+
+      <!-- Hero Text -->
+      <div class="hero-text reveal">
+        <span class="hero-title-en">KAMIYA SHUN — PALM READING MASTER</span>
+        <h1>神矢 瞬<br>手相鑑定</h1>
+        <p>
+          神主として神霊と向き合い続けた眼が、<br>
+          あなたの掌に刻まれた運命の線を解き明かします。<br>
+          一枚の写真から、過去・現在・未来を紐解く本格鑑定。
+        </p>
+        <div>
+          <a href="#contact" class="hero-cta">今すぐ鑑定を申し込む</a>
+          <span class="hero-price-badge">
+            <span class="price">¥3,000</span>
+            <span class="lead">納期 2〜3日</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 手相の4線解説 ══ -->
+<section id="lines">
+  <div class="container">
+    <p class="section-label reveal">THE FOUR LINES</p>
+    <h2 class="reveal">手相の4主要線</h2>
+    <div class="section-divider reveal"></div>
+
+    <!-- Palm Hand Illustration -->
+    <div class="palm-figure reveal">
+      <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="palmglow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Hand background glow -->
+        <ellipse cx="110" cy="155" rx="80" ry="100" fill="rgba(201,168,76,0.04)"/>
+        <!-- Palm / hand shape -->
+        <path d="M 55,260
+                 C 42,258 30,245 28,228
+                 C 22,195 18,155 18,130
+                 C 18,112 28,100 42,100
+                 L 42,80 C 42,66 54,60 66,66
+                 L 66,52 C 66,38 78,32 90,38
+                 L 90,46 C 90,32 102,26 114,32
+                 L 114,52 C 124,44 136,50 136,64
+                 L 136,96 C 148,88 162,96 162,110
+                 L 162,140
+                 C 162,168 154,190 146,212
+                 C 138,234 128,252 116,264
+                 Z"
+          fill="#1a1526" stroke="#c9a84c" stroke-width="1.5" opacity="0.9"/>
+        <!-- Palm crease texture -->
+        <path d="M 55,200 Q 80,195 110,198 Q 130,200 145,210" fill="none" stroke="#2a2036" stroke-width="0.8" opacity="0.5"/>
+
+        <!-- ① 生命線 Life Line (red) -->
+        <path d="M 60,218 C 56,185 50,150 54,120 C 58,95 68,78 80,68"
+          fill="none" stroke="#ff5555" stroke-width="3" filter="url(#palmglow)" stroke-linecap="round"/>
+        <!-- ② 頭脳線 Head Line (blue) -->
+        <path d="M 60,145 C 72,140 88,136 108,136 C 124,136 138,140 148,148"
+          fill="none" stroke="#5588ff" stroke-width="3" filter="url(#palmglow)" stroke-linecap="round"/>
+        <!-- ③ 感情線 Heart Line (pink) -->
+        <path d="M 58,112 C 72,104 92,100 110,102 C 128,104 142,110 150,118"
+          fill="none" stroke="#ff88cc" stroke-width="3" filter="url(#palmglow)" stroke-linecap="round"/>
+        <!-- ④ 運命線 Fate Line (gold) -->
+        <path d="M 108,248 C 108,210 110,170 110,136 C 110,110 112,90 114,70"
+          fill="none" stroke="#c9a84c" stroke-width="3" filter="url(#palmglow)" stroke-linecap="round"/>
+
+        <!-- Line labels -->
+        <circle cx="54" cy="218" r="5" fill="#ff5555"/>
+        <circle cx="58" cy="112" r="5" fill="#ff88cc"/>
+        <circle cx="58" cy="145" r="5" fill="#5588ff"/>
+        <circle cx="108" cy="248" r="5" fill="#c9a84c"/>
+      </svg>
+    </div>
+
+    <div class="lines-grid">
+      <div class="line-card reveal" style="--line-color:#ff5555">
+        <div class="line-icon">🔴</div>
+        <div class="line-name">生命線</div>
+        <span class="line-name-sub">LIFE LINE</span>
+        <p>生命力・体力・健康状態を示す最も重要な線。長さ・深さ・カーブの形状から、生涯のバイタリティと重大な転機を読み取ります。</p>
+      </div>
+      <div class="line-card reveal" style="--line-color:#ff88cc">
+        <div class="line-icon">🩷</div>
+        <div class="line-name">感情線</div>
+        <span class="line-name-sub">HEART LINE</span>
+        <p>恋愛観・感情の豊かさ・人間関係を映す線。愛情表現の深さ、恋愛のパターン、人との絆の結び方が刻まれています。</p>
+      </div>
+      <div class="line-card reveal" style="--line-color:#5588ff">
+        <div class="line-icon">🔵</div>
+        <div class="line-name">頭脳線</div>
+        <span class="line-name-sub">HEAD LINE</span>
+        <p>知性・思考パターン・判断力を示す線。思考の柔軟性や論理性、創造性の高さ、また重大な決断の時期を読み解きます。</p>
+      </div>
+      <div class="line-card reveal" style="--line-color:#c9a84c">
+        <div class="line-icon">✨</div>
+        <div class="line-name">運命線</div>
+        <span class="line-name-sub">FATE LINE</span>
+        <p>人生の方向性・使命・社会的成功を示す神秘の線。仕事の運勢、転職・独立の時期、生涯を貫く天命が宿ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 鑑定の流れ ══ -->
+<section id="flow">
+  <div class="container">
+    <p class="section-label reveal">HOW IT WORKS</p>
+    <h2 class="reveal">鑑定の流れ</h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="flow-steps">
+      <div class="step reveal">
+        <div class="step-num">
+          <span class="n">STEP 1</span>
+          <span class="icon">📧</span>
+        </div>
+        <h3>お申し込み</h3>
+        <p>メールにてお名前・年齢・ご相談内容をお送りください</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">
+          <span class="n">STEP 2</span>
+          <span class="icon">📸</span>
+        </div>
+        <h3>写真のご送付</h3>
+        <p>両手のひらを自然光の下で撮影し、メールに添付してください</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">
+          <span class="n">STEP 3</span>
+          <span class="icon">🔮</span>
+        </div>
+        <h3>鑑定・執筆</h3>
+        <p>神主の眼と手相学の知識を統合し、丁寧に鑑定文を作成します</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">
+          <span class="n">STEP 4</span>
+          <span class="icon">📜</span>
+        </div>
+        <h3>鑑定書お届け</h3>
+        <p>メールにてPDF形式の鑑定書をお送りします（2〜3営業日）</p>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top:3rem; font-size:0.82rem; color:var(--text-dim);">
+      ※ お支払いはお申し込み後、銀行振込にてお願いいたします
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ 料金 ══ -->
+<section id="price">
+  <div class="container">
+    <p class="section-label reveal">PRICING</p>
+    <h2 class="reveal">鑑定料金</h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="price-card reveal">
+      <div class="price-amount"><span>¥</span>3,000<span>円</span></div>
+      <p class="price-tax">（税込）</p>
+      <ul class="price-features">
+        <li><span class="dot"></span>両手4主要線の詳細鑑定</li>
+        <li><span class="dot"></span>恋愛・仕事・健康・運命の総合分析</li>
+        <li><span class="dot"></span>PDF形式の鑑定書お届け</li>
+        <li><span class="dot"></span>納期：お支払い確認後 2〜3営業日</li>
+        <li><span class="dot"></span>ご質問1件まで無料対応</li>
+      </ul>
+      <a href="#contact" class="price-cta">鑑定を申し込む</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ プロフィール ══ -->
+<section id="profile">
+  <div class="container">
+    <p class="section-label reveal">PROFILE</p>
+    <h2 class="reveal">鑑定士プロフィール</h2>
+    <div class="section-divider reveal"></div>
+
+    <div class="profile-inner">
+      <!-- Avatar -->
+      <div class="profile-avatar-wrap reveal">
+        <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="aura2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#6b35a8" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#6b35a8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="100" cy="150" rx="90" ry="130" fill="url(#aura2)"/>
+          <!-- Hat -->
+          <ellipse cx="100" cy="70" rx="28" ry="7" fill="#14082a"/>
+          <path d="M86,70 C84,50 88,28 96,14 C98,9 100,6 100,6 C100,6 102,9 104,14 C112,28 116,50 114,70 Z" fill="#0c0520" stroke="#2a1040" stroke-width="1.2"/>
+          <circle cx="100" cy="6" r="4" fill="#c9a84c"/>
+          <!-- Face -->
+          <ellipse cx="100" cy="100" rx="25" ry="30" fill="#f5e6c8"/>
+          <ellipse cx="90" cy="95" rx="4.5" ry="5.5" fill="#1a0e06"/>
+          <ellipse cx="110" cy="95" rx="4.5" ry="5.5" fill="#1a0e06"/>
+          <circle cx="91.5" cy="93.5" r="1.2" fill="white" opacity="0.7"/>
+          <circle cx="111.5" cy="93.5" r="1.2" fill="white" opacity="0.7"/>
+          <path d="M84,87 Q90,83 96,86" fill="none" stroke="#3a1e0a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M104,86 Q110,83 116,87" fill="none" stroke="#3a1e0a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M92,114 Q100,118 108,114" fill="none" stroke="#a07050" stroke-width="1.3" stroke-linecap="round"/>
+          <!-- Robe -->
+          <path d="M72,128 C62,133 50,145 46,165 L44,230 L156,230 L154,165 C150,145 138,133 128,128 Z" fill="#f4f2ee"/>
+          <path d="M78,128 L100,158 L122,128" fill="#e8e5e0" stroke="#c9a84c" stroke-width="1"/>
+          <circle cx="100" cy="148" r="5.5" fill="#c9a84c"/>
+          <!-- Hakama -->
+          <rect x="44" y="208" width="112" height="72" rx="2" fill="#3a1250"/>
+          <rect x="44" y="208" width="112" height="11" fill="#2a0a3e"/>
+          <path d="M62,208 Q100,200 138,208" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+          <!-- Decorative particles -->
+          <circle cx="20" cy="120" r="2" fill="#c9a84c" opacity="0.6"/>
+          <circle cx="180" cy="100" r="1.5" fill="#c9a84c" opacity="0.5"/>
+          <circle cx="22" cy="200" r="1.5" fill="#c9a84c" opacity="0.4"/>
+        </svg>
+        <div class="profile-name-ja">神矢 瞬</div>
+        <div class="profile-title">神職（神主）兼 手相鑑定士</div>
+      </div>
+
+      <!-- Bio -->
+      <div class="profile-bio reveal">
+        <h3>神と人の間に立ち、掌の声を聴く</h3>
+        <p>
+          幼少より神社に仕え、二十余年の神職奉仕の中で「人の運命は掌に宿る」という確信を深めてきました。
+          神事や祈祷を通じて培った霊的感受性と、東洋・西洋の手相学を独自に融合した鑑定法で、多くの方の人生に寄り添っています。
+        </p>
+        <p>
+          鑑定は単なる「当たる・当たらない」ではなく、あなたの本来の姿と可能性を照らし出すもの。
+          手相に宿る神意を丁寧に言語化し、前に進む力をお渡しすることが使命と考えています。
+        </p>
+        <div class="profile-tags">
+          <span class="tag">神職資格</span>
+          <span class="tag">手相鑑定歴 15年</span>
+          <span class="tag">累計鑑定 1,200件以上</span>
+          <span class="tag">東洋手相学</span>
+          <span class="tag">西洋カイロマンシー</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ Footer / Contact ══ -->
+<footer id="contact">
+  <div class="footer-logo">⛩ 神矢 瞬 手相鑑定</div>
+  <p class="footer-sub">KAMIYA SHUN PALM READING</p>
+  <a href="mailto:uranai@kamiya-shun.jp" class="contact-email">uranai@kamiya-shun.jp</a>
+  <p class="copyright">© 2025 神矢 瞬 手相鑑定事務所. All rights reserved.</p>
+</footer>
+
+
+<script>
+  // ── Floating stars ──
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --d:${3+Math.random()*6}s;
+      --delay:${Math.random()*6}s;
+      --op:${0.3+Math.random()*0.5};
+      width:${1+Math.random()*2}px;
+      height:${1+Math.random()*2}px;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.1}s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
